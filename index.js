@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import { Canvas, Image } from 'skia-canvas';
+import { Chart } from 'chart.js';
 
 const app = express();
 const port = 3005;
@@ -9,12 +11,6 @@ app.use(cors());
 
 // Middleware để phân tích yêu cầu JSON
 app.use(express.json());
-
-
-import { Chart } from 'chart.js/auto';
-import { Canvas } from 'skia-canvas';
-import fs from 'fs';
-
 
 const renderChart = async () => {
   const width = 800;
