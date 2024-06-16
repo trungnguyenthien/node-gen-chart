@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { Canvas, Image } from 'skia-canvas';
-import { Chart } from 'chart.js';
+import { Chart } from 'chart.js/auto';
 
 const app = express();
 const port = 3005;
@@ -49,7 +49,7 @@ const renderChart = async () => {
 };
 
 
-app.get('/', async (req, res) => {
+app.get('/demo', async (req, res) => {
   try {
       const imageBuffer = await renderChart();
       res.set('Content-Type', 'image/png');
@@ -60,12 +60,31 @@ app.get('/', async (req, res) => {
   }
 });
 
-// Route mẫu để nhận dữ liệu JSON từ client
-app.post('/data', (req, res) => {
-  const data = req.body;
-  console.log(data);
-  res.json({ message: 'Data received', data });
-});
+/**
+ {
+  "type": "bar",
+  "data": {
+    "labels": ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    "datasets": [
+      {
+        "label": 'Dataset 1',
+        "data": [65, 59, 80, 81, 56, 55, 40],
+        "bgColor": "FFFFFF",
+        "bdColor": "FFFFFF",
+        "sColor": "FFFFFF",
+        "bdw": 1
+
+      }
+    ]
+  }
+ }
+ */
+
+// app.get('/chart', (req, res) => {
+//   let base64Data = req.query.q
+//   let encode64 = Buffer.from(base64Data, 'base64').toString('utf-8');
+//   let chartData = JSON.parse(encode64);
+// });
 
 // Khởi động server
 app.listen(port, () => {
