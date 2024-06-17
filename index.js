@@ -19,7 +19,7 @@ app.use(async (req, res, next) => {
   }
 });
 
-app.use('/charts', chartRoutes);
+app.use('/chart', chartRoutes);
 
 const startServer = async () => {
   try {
@@ -35,14 +35,3 @@ const startServer = async () => {
 };
 
 startServer();
-
-// app.get('/chart', (req, res) => {
-//   let base64Data = req.query.q
-//   let decode64 = Buffer.from(base64Data, 'base64').toString('utf-8');
-//   let chartData = JSON.parse(decode64);
-// });
-
-// // Khởi động server
-// app.listen(port, () => {
-//   console.log(`Server is running on http://localhost:${port}`);
-// });

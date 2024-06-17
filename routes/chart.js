@@ -6,6 +6,7 @@ import crypto from 'crypto';
 import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
+const imageType = 'image/png'
 
 router.get('/', async (req, res) => {
   try {
@@ -13,7 +14,7 @@ router.get('/', async (req, res) => {
     let decode = Buffer.from(b64string, 'base64').toString('utf-8');
 
     let data = JSON.parse(decode)
-    res.set('Content-Type', 'image/png');
+    res.set('Content-Type', imageType);
     res.send( await renderChart(data));
   } catch (error) {
     // Xử lý lỗi nếu có
@@ -34,7 +35,7 @@ router.get('/:id', async (req, res) => {
     }
     // Nếu tìm thấy, trả về đối tượng chart
     let data = JSON.parse(chart.data)
-    res.set('Content-Type', 'image/png');
+    res.set('Content-Type', imageType);
     res.send( await renderChart(data));
   } catch (error) {
     // Xử lý lỗi nếu có
@@ -72,10 +73,13 @@ const renderChart = async (data) => {
   const height = 500;
   const canvas = new Canvas(width, height);
   const ctx = canvas.getContext('2d');
+  // Đặt nền màu trắng
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0, 0, width, height);
   // Tạo biểu đồ
   new Chart(ctx, data);
   // Chuyển đổi canvas thành buffer
-  const buffer = await canvas.toBuffer('image/png');
+  const buffer = await canvas.toBuffer(imageType);
   return buffer;
 };
 
