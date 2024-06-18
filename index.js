@@ -5,7 +5,7 @@ import { sequelize } from './models/chart.js';
 import chartRoutes from './routes/chart.js';
 import getRawBody from 'raw-body';
 const app = express();
-const port = 3005;
+const port = process.env.PORT || 3005;
 
 // Sử dụng CORS middleware
 app.use(cors());
