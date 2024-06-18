@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 // import bodyParser from 'body-parser';
-import { sequelize } from './models/chart.js';
+// import { sequelize } from './models/chart.js';
 import chartRoutes from './routes/chart.js';
 import getRawBody from 'raw-body';
 const app = express();
@@ -23,7 +23,7 @@ app.use('/chart', chartRoutes);
 
 const startServer = async () => {
   try {
-      await sequelize.sync();
+      // await sequelize.sync();
       console.log('Database synced!');
       
       app.listen(port, () => {
